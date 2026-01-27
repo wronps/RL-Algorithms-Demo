@@ -26,7 +26,7 @@ uv run python -m app.main
 ```
 ## Project Structure (something like that)
 ```
-rl_demo/
+RL-Algorithms-Demo/
   app/
     __init__.py
     main.py
