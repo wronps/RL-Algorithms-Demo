@@ -22,7 +22,7 @@ uv add pyside6 numpy pyyaml pyqtgraph
 There can be more.
 To run the program
 ```bash
-uv run main.py
+uv run python -m app.main
 ```
 ## Project Structure (something like that)
 ```
