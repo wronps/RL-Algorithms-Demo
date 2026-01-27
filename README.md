@@ -12,8 +12,8 @@ This repository contains implementations of various Reinforcement Learning (RL) 
 
 ## init
 First init the uv environment by running the following command:
-`uv init`
+```uv init```
 Add the environment
-`uv add pyside6 numpy pyyaml pyqtgraph` there can be more.
+```uv add pyside6 numpy pyyaml pyqtgraph``` there can be more.
 To run the program
-`uv run python -m app.main`
+```uv run python -m app.main```
