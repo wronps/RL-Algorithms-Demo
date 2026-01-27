@@ -24,3 +24,31 @@ To run the program
 ```bash
 uv run python -m app.main
 ```
+## Project Structure (something like that)
+```
+rl_demo/
+  app/
+    __init__.py
+    main.py
+    ui/
+      __init__.py
+      main_window.py
+      widgets/
+        __init__.py
+        grid_canvas.py
+        tool_panel.py
+    workers/
+      __init__.py
+      dp_worker.py
+  core/
+    __init__.py
+    mdp/
+      __init__.py
+      types.py
+      gridworld.py
+    dp/
+      __init__.py
+      value_iter.py
+  tests/
+    test_gridworld_transitions.py
+```
