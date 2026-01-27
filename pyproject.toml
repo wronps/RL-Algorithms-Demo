@@ -1,7 +1,7 @@
 [project]
 name = "rl-algorithms-demo"
 version = "0.1.0"
-description = "Add your description here"
+description = "An educational demo program to show different RL algorithms inside Sutton's book. Developed with modern Qt UI and providing flexible features to change the environment and agent settings"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
