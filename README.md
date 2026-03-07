@@ -55,3 +55,4 @@ RL-Algorithms-Demo/
 This makes sure the code is seperated into core algorithms and app for the UI.
 ## potential roadmap:
 Qt Widgets + unique canvas + pyqtgraph for showing the plots for training process.
+
