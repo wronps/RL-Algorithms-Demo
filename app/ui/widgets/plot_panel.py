@@ -1,26 +1,29 @@
-from PySide6 import QtWidgets
+from PySide6 import QtCore, QtWidgets
 
 
-class ToolPanel(QtWidgets.QFrame):
+class PlotPanel(QtWidgets.QFrame):
     def __init__(self, parent: QtWidgets.QWidget | None = None):
         super().__init__(parent)
 
         self.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.setMinimumHeight(220)
+
         self._build_ui()
 
     def _build_ui(self) -> None:
         layout = QtWidgets.QVBoxLayout(self)
-        layout.setSpacing(12)
 
-        title = QtWidgets.QLabel("Tool Panel")
+        title = QtWidgets.QLabel("Plot Area")
+        title.setAlignment(QtCore.Qt.AlignCenter)
         title.setStyleSheet("font-size: 18px; font-weight: bold;")
 
-        desc = QtWidgets.QLabel("Here will be placed environment parameters, algorithm parameters, and the run button.")
+        desc = QtWidgets.QLabel(
+            "Here will display convergence curves, training curves, or other statistical information."
+        )
+        desc.setAlignment(QtCore.Qt.AlignCenter)
         desc.setWordWrap(True)
 
-        placeholder_button = QtWidgets.QPushButton("Run (placeholder)")
-
+        layout.addStretch()
         layout.addWidget(title)
         layout.addWidget(desc)
-        layout.addWidget(placeholder_button)
         layout.addStretch()

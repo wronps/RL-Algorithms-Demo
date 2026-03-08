@@ -20,7 +20,11 @@ Add the environment
 uv add pyside6 numpy pyyaml pyqtgraph
 ```
 There can be more.
-To run the program
+To run the program, first need to sync the uv environment:
+```bash
+uv sync
+```
+Then run the main program:
 ```bash
 uv run python -m app.main
 ```
