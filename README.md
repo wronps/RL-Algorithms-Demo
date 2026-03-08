@@ -40,6 +40,7 @@ RL-Algorithms-Demo/
       widgets/
         __init__.py
         grid_canvas.py
+        plot_panel.py
         tool_panel.py
     workers/
       __init__.py
