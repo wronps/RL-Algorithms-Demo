@@ -8,13 +8,16 @@ Action = Literal["up", "down", "left", "right"]
 class GridworldConfig:
     rows: int = 5
     cols: int = 5
+    step_reward: float = -1.0
+    terminal_state: State | None = None
 
 class Gridworld:
     def __init__(self, config: GridworldConfig):
         self.config = config
         self.rows = config.rows
         self.cols = config.cols
-
+        self.step_reward = config.step_reward
+        self.terminal_state = config.terminal_state
         self._validate_config()
     
     def _validate_config(self) -> None:
@@ -22,7 +25,8 @@ class Gridworld:
             raise ValueError("Rows must be a positive integer.")
         if self.cols <= 0:
             raise ValueError("Cols must be a positive integer.")
-        
+        if self.terminal_state is not None and not self.is_valid_state(self.terminal_state):
+            raise ValueError("Terminal state must be within the grid.")
     @property
     def shape(self) -> tuple[int, int]:
         return self.rows, self.cols
@@ -48,6 +52,8 @@ class Gridworld:
     def get_next_state(self, state: State, action: Action) -> State:
         if action not in self.get_actions():
             raise ValueError(f"Invalid action: {action}")
+        if self.is_terminal_state(state):
+            return state
         row, col = state
         if action == "up":
             candidate = (row - 1, col)
@@ -60,3 +66,11 @@ class Gridworld:
         if self.is_valid_state(candidate):
             return candidate
         return state
+    
+    def get_reward(self, state: State, action: Action, next_state: State) -> float:
+        if self.is_terminal_state(next_state):
+            return 0.0
+        return self.step_reward
+    
+    def is_terminal_state(self, state: State) -> bool:
+        return self.terminal_state is not None and state == self.terminal_state

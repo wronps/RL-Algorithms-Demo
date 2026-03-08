@@ -27,6 +27,12 @@ class ToolPanel(QtWidgets.QFrame):
         self.cols_spin.setRange(2, 50)
         self.cols_spin.setValue(5)
 
+        self.step_reward_spin = QtWidgets.QDoubleSpinBox()
+        self.step_reward_spin.setRange(-100.0, 100.0)
+        self.step_reward_spin.setDecimals(2)
+        self.step_reward_spin.setSingleStep(0.1)
+        self.step_reward_spin.setValue(-1.0)
+
         self.gamma_spin = QtWidgets.QDoubleSpinBox()
         self.gamma_spin.setRange(0.0, 1.0)
         self.gamma_spin.setSingleStep(0.01)
@@ -51,6 +57,7 @@ class ToolPanel(QtWidgets.QFrame):
 
         form.addRow("Rows", self.rows_spin)
         form.addRow("Cols", self.cols_spin)
+        form.addRow("Step Reward", self.step_reward_spin)
         form.addRow("Gamma", self.gamma_spin)
         form.addRow("Theta", self.theta_spin)
         form.addRow("Play Speed", self.play_speed_spin)
@@ -87,12 +94,14 @@ class ToolPanel(QtWidgets.QFrame):
         self.gamma_spin.setValue(0.95)
         self.theta_spin.setValue(0.0001)
         self.play_speed_spin.setValue(1.0)
+        self.step_reward_spin.setValue(-1.0)
         self.max_iterations_spin.setValue(200)
 
     def get_environment_config(self) -> GridworldConfig:
         return GridworldConfig(
             rows=self.rows_spin.value(),
-            cols=self.cols_spin.value()
+            cols=self.cols_spin.value(),
+            step_reward=self.step_reward_spin.value()
         )
 
     def get_play_speed(self) -> float:

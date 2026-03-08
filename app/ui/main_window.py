@@ -78,7 +78,7 @@ class MainWindow(QtWidgets.QMainWindow):
         print("State count:", state_count)
         print("Actions:", actions)
 
-        self.statusBar().showMessage(f"Run clicked | Grid: {rows}x{cols} | gamma={gamma}")
+        self.statusBar().showMessage(f"Run clicked | Grid: {rows}x{cols} | gamma={gamma} | step_reward={env.step_reward}")
 
     def _handle_reset_clicked(self) -> None:
         self.tool_panel.reset_to_defaults()
