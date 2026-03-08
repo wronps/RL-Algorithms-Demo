@@ -1,5 +1,6 @@
 from PySide6 import QtWidgets
-
+from core.mdp.gridworld import GridworldConfig
+from core.dp.value_iteration import ValueIterationConfig
 
 class ToolPanel(QtWidgets.QFrame):
     def __init__(self, parent: QtWidgets.QWidget | None = None):
@@ -75,15 +76,11 @@ class ToolPanel(QtWidgets.QFrame):
         root_layout.addStretch()
 
     def get_config(self) -> dict[str, int | float]:
-        return {
-            "rows": self.rows_spin.value(),
-            "cols": self.cols_spin.value(),
-            "gamma": self.gamma_spin.value(),
-            "theta": self.theta_spin.value(),
-            "play_speed": self.play_speed_spin.value(),
-            "max_iterations": self.max_iterations_spin.value(),
-        }
-    
+        config: dict[str, int | float] = {}
+        config.update(self.get_environment_config())
+        config.update(self.get_algorithm_config())
+        return config
+
     def reset_to_defaults(self) -> None:
         self.rows_spin.setValue(5)
         self.cols_spin.setValue(5)
@@ -91,3 +88,19 @@ class ToolPanel(QtWidgets.QFrame):
         self.theta_spin.setValue(0.0001)
         self.play_speed_spin.setValue(1.0)
         self.max_iterations_spin.setValue(200)
+
+    def get_environment_config(self) -> GridworldConfig:
+        return GridworldConfig(
+            rows=self.rows_spin.value(),
+            cols=self.cols_spin.value()
+        )
+
+    def get_play_speed(self) -> float:
+        return self.play_speed_spin.value()
+    
+    def get_algorithm_config(self) -> ValueIterationConfig:
+        return ValueIterationConfig(
+            gamma=self.gamma_spin.value(),
+            theta=self.theta_spin.value(),
+            max_iterations=self.max_iterations_spin.value()
+        )

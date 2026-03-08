@@ -1,7 +1,8 @@
 from PySide6 import QtCore, QtWidgets, QtGui
-from ui.widgets.tool_panel import ToolPanel
-from ui.widgets.grid_canvas import GridCanvas
-from ui.widgets.plot_panel import PlotPanel
+from app.ui.widgets.tool_panel import ToolPanel
+from app.ui.widgets.grid_canvas import GridCanvas
+from app.ui.widgets.plot_panel import PlotPanel
+from core.mdp.gridworld import Gridworld
 
 debug = 1
 
@@ -55,12 +56,27 @@ class MainWindow(QtWidgets.QMainWindow):
         return panel
     
     def _handle_run_clicked(self) -> None:
-        config = self.tool_panel.get_config()
-        print(config)
+        env_config = self.tool_panel.get_environment_config()
+        alg_config = self.tool_panel.get_algorithm_config()
+        play_speed = self.tool_panel.get_play_speed()
+        try:
+            env = Gridworld(env_config)
+        except ValueError as exc:
+            self.statusBar().showMessage(f"Invalid grid config: {exc}")
+            return
 
-        rows = config["rows"]
-        cols = config["cols"]
-        gamma = config["gamma"]
+        print("Environment config:", env_config)
+        print("Environment object:", env)
+        print("Algorithm config:", alg_config)
+        print("Play speed:", play_speed)
+        rows, cols = env.shape
+        gamma = alg_config.gamma
+        states = env.get_states()
+        state_count = env.state_count
+        actions = env.get_actions()
+        print("States:", states)
+        print("State count:", state_count)
+        print("Actions:", actions)
 
         self.statusBar().showMessage(f"Run clicked | Grid: {rows}x{cols} | gamma={gamma}")
 

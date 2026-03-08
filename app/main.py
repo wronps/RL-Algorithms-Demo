@@ -1,7 +1,7 @@
 import sys
 from PySide6 import QtWidgets
 
-from ui.main_window import MainWindow
+from app.ui.main_window import MainWindow
 
 
 def main() -> int:
